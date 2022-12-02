@@ -1,6 +1,7 @@
 """
 This file contains the functions that helps in identifying if the puzzle is goal state and can valet service be ran on
-it or not. It also has a checker method to check if given two puzzles are equal.
+it or not. It also has a checker method to check if given two puzzles are equal. Basically, functions that are helping
+to reach goal state.
 """
 
 
@@ -25,10 +26,28 @@ def valetService(puzzle):  # This will run mandatory valet service on every puzz
     return puzzle
 
 
-def arePuzzlesEqual(puzzle1, puzzle2):  #checks if passed puzzles are equal
+def checkPuzzlesIfEqual(puzzle1, puzzle2):  # checks if passed puzzles are equal
     for row in range(0, 6):
         for col in range(0, 6):
             if puzzle1[row][col] != puzzle2[row][col]:
                 return False
 
     return True
+
+
+def stringConfigPuzzle(puzzle):  # This will convert 6*6 matrix to string configuration and it is needed for solution and search files.
+    string_config = ""
+
+    for i in puzzle:
+        for j in i:
+            string_config += j
+
+    return string_config
+
+
+def printMatrixPuzzle(puzzle):  #This will print the puzzle in matrix format for solution and search files
+    for i in puzzle:
+        temp = ""
+        for j in i:
+            temp += j + " "
+        print(temp)
