@@ -18,7 +18,7 @@ def readpuzzle(file):
             puzzlerow = []
             for i in range(len(stringofpuzzle)):
 
-                if stringofpuzzle[i] not in fuels and stringofpuzzle != ".":
+                if stringofpuzzle[i] not in fuels and stringofpuzzle[i] != '.':
                     fuels[stringofpuzzle[i]] = 100  # 1. if no fuel level is indicated,assuming the vehicle has a fuel level of 100
                 puzzlerow.append(stringofpuzzle[i])
                 if len(puzzlerow) == 6:
@@ -30,6 +30,12 @@ def readpuzzle(file):
                 fuels[fuel[0]] = int(fuel[1])
 
             listofpuzzle.append({"puzzleNum": puzzlenum, "stringOfPuzzle": stringofpuzzle, "puzzle": puzzle, "fuel": fuels})
+            print("\n")
+            print("puzzleNum:", puzzlenum)
+            print("stringofpuzzle:", stringofpuzzle)
+            print("puzzle:", puzzle)
+            print("fuel:", fuels)
+
             puzzlenum = puzzlenum + 1
 
     file_input.close()
@@ -37,4 +43,3 @@ def readpuzzle(file):
 
 
 puzzlelist = readpuzzle('sample-input.txt')
-
