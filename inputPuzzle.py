@@ -6,7 +6,7 @@ def readpuzzle(file):
 
     for line in lines:
         fuels = {}
-        puzzle = []  # an array to store a single puzzle
+        puzzle = []     # an array to store a single puzzle
         line = line.strip()  # Removes any leading(space in beginning) & trailing (spaces at the end)
 
         # 2. an empty line (useful for formatting) – you should skip that line
@@ -15,29 +15,32 @@ def readpuzzle(file):
             splitlines = line.split(" ")
             string_Of_Puzzle = splitlines[0]
 
-            puzzle_row = []
-            for i in range(len(string_Of_Puzzle)):
+            puzzle_row = []  # initializing an empty array puzzle row!
+            for i in range(len(string_Of_Puzzle)):   # running this for loop until the 36 characters of the board
 
-                if string_Of_Puzzle[i] not in fuels and string_Of_Puzzle != ".":
+                if string_Of_Puzzle[i] not in fuels and string_Of_Puzzle[i] != '.':  # '.' should not have any fuel as it is not a car
                     fuels[string_Of_Puzzle[i]] = 100  # 1. if no fuel level is indicated,assuming the vehicle has a fuel level of 100
-                puzzle_row.append(string_Of_Puzzle[i])
-                if len(puzzle_row) == 6:
+                puzzle_row.append(string_Of_Puzzle[i])  # appending the default fuel of each car
+                if len(puzzle_row) == 6:   # breaking the string of puzzle after 6 characters
                     puzzle.append(puzzle_row)
-                    puzzle_row = []
-
-            array_of_fuel = splitlines[1:]
-            for fuel in array_of_fuel:
+                    puzzle_row = []  # this to put first row of the board into the array.
+                # end of loop
+            arrayoffuel = splitlines[1:]
+            for fuel in arrayoffuel:        # this for loop for accessing the fuel level after the 36 characters of the board!
                 fuels[fuel[0]] = int(fuel[1])
+                # end of loop
+            # Now appending everything together  to get a single puzzle
+            list_of_puzzle.append({"puzzleNum": puzzle_num, "stringOfPuzzle": string_Of_Puzzle, "puzzle": puzzle, "fuel": fuels})
+            print("\n")
+            print("puzzleNum:", puzzle_num)
+            print("stringofpuzzle:", string_Of_Puzzle)
+            print("puzzle:", puzzle)
+            print("fuel:", fuels)
 
-            list_of_puzzle.append({"puzzle_num": puzzle_num,
-                                   "string_Of_Puzzle": string_Of_Puzzle,
-                                   "puzzle": puzzle,
-                                   "fuel": fuels})
-            puzzle_num += 1
-
+            puzzle_num = puzzle_num + 1
+    # end of loop
     file_input.close()
     return list_of_puzzle
 
 
-puzzle_list = readpuzzle('sample-input.txt')
-print(puzzle_list)
+puzzlelist = readpuzzle('sample-input.txt')

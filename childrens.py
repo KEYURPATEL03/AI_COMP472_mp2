@@ -1,10 +1,124 @@
-"""
-The methods in this file will return the child nodes/state/puzzle of any given puzzle. It will first find the
-alignment of the car, if it is horizontal or vertical and then length of the car and then return, child states.
-"""
-
 import copy
+from secondaryMethods import *
 
+def findNextMoves(solutionpath, puzzle, k, start_car, end_car, fuels, heuristic, car_align):
+    global car_type
+    new_nodes = []
+    car_length = end_car - start_car + 1
+    if car_align == "horizontal":
+        car_type = puzzle[k][start_car]
+    elif car_align == "vertical":
+        car_type = puzzle[start_car][k]
+
+    for position in reversed(range(start_car)):
+        if car_align == "horizontal":
+            if puzzle[k][position] != ".":   # move car left
+                break
+        elif car_align == "vertical":
+            if puzzle[position][k] != ".":      # move car up
+                break
+
+        new_puzzle = copy.deepcopy(puzzle)  # 6*6 list
+        new_fuels = copy.deepcopy(fuels)  # dict
+        new_solutionpath = copy.deepcopy(solutionpath)  # list
+
+        displacement = start_car - position  # always move by 1 at a time
+
+        if displacement <= fuels[car_type]:  # to check the car has enough fuel to move
+            new_fuels[car_type] = new_fuels[car_type] - displacement  # decrease the fuel level, by amount the car moved
+            carPartsToMove = car_length
+
+            for newIndex in range(position,
+                                  end_car + 1):  # moving the car, by sending each element left at a time and then
+
+                if carPartsToMove > 0:
+                    if car_align == "horizontal":
+                        new_puzzle[k][newIndex] = car_type
+                    elif car_align == "vertical":
+                        new_puzzle[newIndex][k] = car_type
+                    carPartsToMove -= 1
+                else:
+                    if car_align == "horizontal":
+                        new_puzzle[k][newIndex] = "."
+                    elif car_align == "vertical":
+                        new_puzzle[newIndex][k] = "."
+                # end of loop
+            new_puzzle = valetService(new_puzzle)
+            new_solutionpath.append({
+                "carType": car_type,
+                "direction": "right",  #
+                "fuelLevels": new_fuels,
+                "puzzle": new_puzzle
+            })
+
+            new_node = {
+                "puzzle": new_puzzle,
+                "solutionPath": new_solutionpath,
+                "fuelLevels": new_fuels,
+                "stringConfig": stringConfigPuzzle(new_puzzle),
+            }
+
+            new_node["fOfN"] = heuristic(new_node)
+            new_nodes.append(new_node)
+
+        else:  # this will be executed if car has no fuel
+            break
+    # end of loop
+
+    for position in range(end_car+1,6):
+        if car_align == "horizontal":
+            if puzzle[k][position] != ".":
+                break
+        elif car_align == "vertical":
+            if puzzle[position][k] != ".":
+                break
+
+        new_puzzle = copy.deepcopy(puzzle)  # 6*6 list
+        new_fuels = copy.deepcopy(fuels)  # dict
+        new_solutionpath = copy.deepcopy(solutionpath)  # list
+
+        displacement = position - end_car  # always move by 1 at a time
+
+        if displacement <= fuels[car_type]:  # to check the car has enough fuel to move
+            new_fuels[car_type] = new_fuels[car_type] - displacement  # decrease the fuel level, by amount the car moved
+            carPartsToMove = car_length
+
+            for newIndex in reversed(range(start_car, position + 1)):  # moving the car, by sending each element left at a time and then
+
+                if carPartsToMove > 0:
+                    if car_align == "horizontal":
+                        new_puzzle[k][newIndex] = car_type
+                    elif car_align == "vertical":
+                        new_puzzle[newIndex][k] = car_type
+                    carPartsToMove -= 1
+                else:
+                    if car_align == "horizontal":
+                        new_puzzle[k][newIndex] = "."
+                    elif car_align == "vertical":
+                        new_puzzle[newIndex][k] = "."
+                # end of loop
+            new_puzzle = valetService(new_puzzle)
+            new_solutionpath.append({
+                "carType": car_type,
+                "direction": "right",  #
+                "fuelLevels": new_fuels,
+                "puzzle": new_puzzle
+            })
+
+            new_node = {
+                "puzzle": new_puzzle,
+                "solutionPath": new_solutionpath,
+                "fuelLevels": new_fuels,
+                "stringConfig": stringConfigPuzzle(new_puzzle),
+            }
+
+            new_node["fOfN"] = heuristic(new_node)
+            new_nodes.append(new_node)
+
+        else:  # this will be executed if car has no fuel
+            break
+    return new_nodes
+    # end of loop
 
 def childNodes(puzzle, heuristic):
     children = []
@@ -44,8 +158,3 @@ def childNodes(puzzle, heuristic):
                     children += vertical_children
 
     return children
-
-
-def findNextMoves(sol_path, temp_puzzle, i, j):
-    pass
-
