@@ -28,7 +28,7 @@ def valetService(puzzle):  # This will run mandatory valet service on every puzz
 def arePuzzlesEqual(puzzle1, puzzle2):  #checks if passed puzzles are equal
     for row in range(0, 6):
         for col in range(0, 6):
-            if puzzle1[row][col] == puzzle2[row][col]:
+            if puzzle1[row][col] != puzzle2[row][col]:
                 return False
-    
+
     return True
