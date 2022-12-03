@@ -30,10 +30,10 @@ def readpuzzle(file):
                 fuels[fuel[0]] = int(fuel[1])
                 # end of loop
             # Now appending everything together  to get a single puzzle
-            list_of_puzzle.append({"puzzleNum": puzzle_num, "stringOfPuzzle": string_Of_Puzzle, "puzzle": puzzle, "fuel": fuels})
+            list_of_puzzle.append({"puzzle": puzzle, "fuel": fuels, "stringOfPuzzle": string_Of_Puzzle, "puzzleNum": puzzle_num})
             print("\n")
             print("puzzleNum:", puzzle_num)
-            print("stringofpuzzle:", string_Of_Puzzle)
+            print("stringOfPuzzle:", string_Of_Puzzle)
             print("puzzle:", puzzle)
             print("fuel:", fuels)
 
