@@ -136,7 +136,7 @@ def childNodes(puzzle, heuristic):
                 if (column <= 4) and (temp_puzzle[row][column] == temp_puzzle[row][column + 1]): #horizontal car
                     finishing_index_horizontal = column   #This will be used to find length of the car
                     for i in range(column + 2, 6):  #The loop will go till index 5 because there are total 6 elements in a row.
-                        if puzzle[row][i] != puzzle[row][column]:  # if simultaneous horizontal elements are not equal then, it is not a car and break.
+                        if temp_puzzle[row][i] != temp_puzzle[row][column]:  # if simultaneous horizontal elements are not equal then, it is not a car and break.
                             break
                         else:
                             finishing_index_horizontal = i
@@ -148,7 +148,7 @@ def childNodes(puzzle, heuristic):
                 elif (row <= 4) and (temp_puzzle[row][column] == temp_puzzle[row + 1][column]): #vertical car
                     finishing_index_vertical = row  # the starting index of the horizontal car
                     for i in range(row + 2, 6):  #The loop will go till index 5 because there are total 6 rows.
-                        if puzzle[i][column] != puzzle[row][column]:  # if simultaneous horizontal elements are not equal then, it is not a car and break.
+                        if temp_puzzle[i][column] != temp_puzzle[row][column]:  # if simultaneous horizontal elements are not equal then, it is not a car and break.
                             break
                         else:
                             finishing_index_vertical = i
