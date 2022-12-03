@@ -1,6 +1,6 @@
 import time
 import secondaryMethods as secondary
-from childrens import *
+from child import *
 
 
 def algorithms(puzzle, fuels, heuristic, algo):
