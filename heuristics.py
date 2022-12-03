@@ -49,6 +49,17 @@ def GBFSh3(state):
     return 20 * GBFSh1(state)  #noticed that increasing constant value up to certain limit was decreasing solution time
 
 
+def GBFSh4(state):
+    puzzle = state["puzzle"]
+    total_cars_length = 0
+    for row in range(0, 6):
+        for column in range(0, 6):
+            if puzzle[row][column] != ".":
+                total_cars_length +=1
+
+    return total_cars_length - 2
+
+
 def Ah1(state):
     return uniformCostSearch(state) + GBFSh1(state)
 
@@ -59,3 +70,7 @@ def Ah2(state):
 
 def Ah3(state):
     return uniformCostSearch(state) + GBFSh3(state)
+
+
+def Ah4(state):
+    return uniformCostSearch(state) + GBFSh4(state)
