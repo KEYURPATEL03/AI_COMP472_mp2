@@ -44,3 +44,4 @@ def readpuzzle(file):
 
 
 puzzlelist = readpuzzle('sample-input.txt')
+

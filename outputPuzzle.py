@@ -36,13 +36,13 @@ def createSolFile(result, initialConfigString, algorithmType, puzzleNumber, fuel
         solFile.write("Solution path: ")
         solPathString = ""
         for path in result["state"]["solutionPath"]:
-            solPathString += path["carType"] + " " + path["direction"] + " 1; "
+            solPathString += path["carType"] + " " + path["direction"] + str(path["displacement"])+ ";"
         solFile.write(solPathString[0: len(solPathString) - 2])
         solFile.write("\n\n")
 
         for path in result["state"]["solutionPath"]:
             pathString = ""
-            pathString += path["carType"] + " " + path["direction"] + " 1       "
+            pathString += path["carType"] + " " + path["direction"] + " " + str(path["displacement"])+ "     "
             pathString += str(path["fuelLevels"][path["carType"]]) + " "
             for puzzleRow in path["puzzle"]:
                 for puzzleElem in puzzleRow:
@@ -115,15 +115,19 @@ def createSearchFile(result, initialConfigString, algorithmType, puzzleNumber):
 
     searchFile.close()
 
+
+# ----------------------------------------------------------------------------------------------------------------------------
+
+
 def solvePuzzle(puzzle, fuels, initialStringConfig, puzzleNumber):  # main function; call algorithm function for all puzzles
     print("Solving puzzle #" + str(puzzleNumber) + "\n")
 
     # UCS
     print("Using UCS")
-    resultUCS = algorithms(puzzle, fuels, hUcs, "ucs")
+    resultUCS = algorithms(puzzle, fuels,uniformCostSearch , "ucs")
     createSolFile(resultUCS, initialStringConfig, "ucs-", puzzleNumber, fuels)
-    createSearchFile(resultUCS, initialStringConfig, "ucs-", puzzleNumber)
     print("\n")
+
 
 # ----------------------------------------------------------------------------------------------------------------------------
 puzzleList = readpuzzle("sample-input.txt")

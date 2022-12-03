@@ -1,6 +1,12 @@
+""""
+The algorithms are mostly similar and written and edited from the pseudocode given in slides.
+"""
+
 import time
 import secondaryMethods as secondary
 from child import *
+from inputPuzzle import *
+from heuristics import *
 
 
 def algorithms(puzzle, fuels, heuristic, algo):
@@ -15,20 +21,16 @@ def algorithms(puzzle, fuels, heuristic, algo):
 
     starting_state["Fn"] = heuristic(starting_state)  # adds f(n) value of a puzzle by calling the respective method
 
-    open_list = [starting_state]
+    open_list = []
     close_list = []
-    # open_list.append(starting_state)
+    open_list.append(starting_state)
 
-    copy_open_list = {starting_state["stringConfig"]: 1}
-    copy_close_list = {}
-    # copy_open_list.append(starting_state["stringConfig"])
-
-    nbsimilar = 0
-    nbsimilar2 = 0
+    copy_open_list = [starting_state["stringConfig"]]
+    copy_close_list = []
 
     while len(open_list) > 0:
         current_state = open_list.pop(0)
-        del copy_open_list[current_state["stringConfig"]]
+        copy_open_list.remove(current_state["stringConfig"])
 
         if secondary.goalTest(current_state["puzzle"]):
             end_time = time.time()
@@ -42,13 +44,13 @@ def algorithms(puzzle, fuels, heuristic, algo):
 
         else:
             close_list.append(current_state)
-            copy_close_list[current_state["stringConfig"]] = 1  # *
+            copy_close_list.append(current_state["stringConfig"])  # *
 
             child_states = childNodes(current_state, heuristic)
 
             for each_child in child_states:
                 if each_child["stringConfig"] in copy_close_list:
-                    nbsimilar = nbsimilar + 1  # if there is loop increment this
+
                     # -------This is checked only if the algorithm is A/A*-----------
                     if algo == "A":
                         for i in range(len(close_list)):
@@ -56,8 +58,8 @@ def algorithms(puzzle, fuels, heuristic, algo):
                             if each_child["stringConfig"] == close_list[i]["stringConfig"]:
                                 if each_child["Fn"] < close_list[i]["Fn"]:
                                     open_list.append(each_child)
-                                    copy_open_list[each_child["stringConfig"]] = 1
-                                    del copy_close_list[each_child["stringConfig"]]
+                                    copy_open_list.append(each_child["stringConfig"])
+                                    copy_close_list.remove(each_child["stringConfig"])
                                     close_list.pop(i)
 
                                 break
@@ -67,14 +69,14 @@ def algorithms(puzzle, fuels, heuristic, algo):
                     if each_child["stringConfig"] in copy_open_list:
                         for i in range(len(open_list)):
                             if secondary.checkPuzzlesIfEqual(each_child["puzzle"], open_list[i]["puzzle"]):
-                                nbsimilar2 += 1
+
                                 if each_child["Fn"] < open_list[i]["Fn"]:
                                     open_list[i] = each_child
                                 break
 
                     else:
                         open_list.append(each_child)
-                        copy_open_list[each_child["stringConfig"]] = 1
+                        copy_open_list.append(each_child["stringConfig"])
             # out of loop
             open_list.sort(key=lambda x: x["Fn"], reverse=False)
 
@@ -91,4 +93,5 @@ def algorithms(puzzle, fuels, heuristic, algo):
     }
 
 
-# =====================================================================================================================
+
+

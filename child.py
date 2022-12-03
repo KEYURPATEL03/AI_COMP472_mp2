@@ -51,16 +51,18 @@ def moves(sol_path, puzzle, k, start_car, end_car, fuels, heuristic, align):
             if align == "horizontal":
                 new_solutionpath.append({
                     "carType": car_type,
-                    "direction": "left   ",
+                    "direction": "left ",
                     "fuelLevels": new_fuels,
-                    "puzzle": new_puzzle
+                    "puzzle": new_puzzle,
+                    "displacement": displacement
                 })
             else:
                 new_solutionpath.append({
                     "carType": car_type,
                     "direction": "up   ",
                     "fuelLevels": new_fuels,
-                    "puzzle": new_puzzle
+                    "puzzle": new_puzzle,
+                    "displacement": displacement
                 })
 
             new_node = {
@@ -118,14 +120,16 @@ def moves(sol_path, puzzle, k, start_car, end_car, fuels, heuristic, align):
                     "carType": car_type,
                     "direction": "right",
                     "fuelLevels": new_fuels,
-                    "puzzle": new_puzzle
+                    "puzzle": new_puzzle,
+                    "displacement": displacement
                 })
             else:
                 new_solutionpath.append({
                     "carType": car_type,
                     "direction": "down ",
                     "fuelLevels": new_fuels,
-                    "puzzle": new_puzzle
+                    "puzzle": new_puzzle,
+                    "displacement": displacement
                 })
 
             new_node = {
@@ -142,6 +146,8 @@ def moves(sol_path, puzzle, k, start_car, end_car, fuels, heuristic, align):
             break
 
     return new_nodes
+
+# =================================================================================================================
 
 
 def childNodes(state, heuristic):
