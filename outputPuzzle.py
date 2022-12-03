@@ -5,7 +5,7 @@ import xlsxwriter
 
 
 def createSolFile(result, initialConfigString, algorithmType, puzzleNumber, fuelLevels):
-    solFile = open("./output/"+algorithmType + "sol-" + str(puzzleNumber) + ".txt", "w")
+    solFile = open("./output/solution_files/"+algorithmType + "sol-" + str(puzzleNumber) + ".txt", "w")
     if result["result"] == "goal_reached":
         solFile.write("Initial board configuration: " + initialConfigString + "\n\n")
 
@@ -89,7 +89,7 @@ def createSolFile(result, initialConfigString, algorithmType, puzzleNumber, fuel
 
 
 def createSearchFile(result, initialConfigString, algorithmType, puzzleNumber):
-    searchFile = open("./output/"+algorithmType+"search-"+str(puzzleNumber)+".txt", "w")
+    searchFile = open("./output/search_files/"+algorithmType+"search-"+str(puzzleNumber)+".txt", "w")
     close_list = result["close_list"]
     for node in close_list:
         nodeString = ""
@@ -120,24 +120,80 @@ def createSearchFile(result, initialConfigString, algorithmType, puzzleNumber):
 # ----------------------------------------------------------------------------------------------------------------------------
 
 
-#def solvePuzzle(puzzle, fuels, initialStringConfig, puzzleNumber):  # main function; call algorithm function for all puzzles
-    #print("Solving puzzle #" + str(puzzleNumber) + "\n")
+def solvePuzzle(puzzle, fuels, initialStringConfig, puzzleNumber):  # main function; call algorithm function for all puzzles
+    print("Solving puzzle #" + str(puzzleNumber) + "\n")
 
     # UCS
-    #print("Using UCS")
-    #resultUCS = algorithms(puzzle, fuels,GBFSh4 , "ucs")
-    #createSolFile(resultUCS, initialStringConfig, "ucs-", puzzleNumber, fuels)
-    #print("\n")
+    print("Using UCS")
+    resultUCS = algorithms(puzzle, fuels, uniformCostSearch, "ucs")
+    createSolFile(resultUCS, initialStringConfig, "ucs-", puzzleNumber, fuels)
+    createSearchFile(resultUCS, initialStringConfig, "ucs-", puzzleNumber)
+    print("\n")
+
+    # GBFS heuristic 1
+    print("Using GBFS heuristic 1")
+    resultGBFS1 = algorithms(puzzle, fuels, GBFSh1, "gbfs")
+    createSolFile(resultGBFS1, initialStringConfig, "gbfs-h1-", puzzleNumber, fuels)
+    createSearchFile(resultGBFS1, initialStringConfig, "gbfs-h1-", puzzleNumber)
+    print("\n")
+
+    # GBFS heuristic 2
+    print("Using GBFS heuristic 2")
+    resultGBFS2 = algorithms(puzzle, fuels, GBFSh2, "gbfs")
+    createSolFile(resultGBFS2, initialStringConfig, "gbfs-h2-", puzzleNumber, fuels)
+    createSearchFile(resultGBFS2, initialStringConfig, "gbfs-h2-", puzzleNumber)
+    print("\n")
+
+    # GBFS heuristic 3
+    print("Using GBFS heuristic 3")
+    resultGBFS3 = algorithms(puzzle, fuels, GBFSh3, "gbfs")
+    createSolFile(resultGBFS3, initialStringConfig, "gbfs-h3-", puzzleNumber, fuels)
+    createSearchFile(resultGBFS3, initialStringConfig, "gbfs-h3-", puzzleNumber)
+    print("\n")
+
+    # GBFS heuristic 4
+    print("Using GBFS heuristic 4")
+    resultGBFS4 = algorithms(puzzle, fuels, GBFSh4, "gbfs")
+    createSolFile(resultGBFS4, initialStringConfig, "gbfs-h4-", puzzleNumber, fuels)
+    createSearchFile(resultGBFS4, initialStringConfig, "gbfs-h4-", puzzleNumber)
+    print("\n")
+
+    # A heuristic 1
+    print("Using A heuristic 1")
+    resultA1 = algorithms(puzzle, fuels, Ah1, "a")
+    createSolFile(resultA1, initialStringConfig, "a-h1-", puzzleNumber, fuels)
+    createSearchFile(resultA1, initialStringConfig, "a-h1-", puzzleNumber)
+    print("\n")
+
+    # A heuristic 2
+    print("Using A heuristic 2")
+    resultA2 = algorithms(puzzle, fuels, Ah2, "a")
+    createSolFile(resultA2, initialStringConfig, "a-h2-", puzzleNumber, fuels)
+    createSearchFile(resultA2, initialStringConfig, "a-h2-", puzzleNumber)
+    print("\n")
+
+    # A heuristic 3
+    print("Using A heuristic 3")
+    resultA3 = algorithms(puzzle, fuels, Ah3, "a")
+    createSolFile(resultA3, initialStringConfig, "a-h3-", puzzleNumber, fuels)
+    createSearchFile(resultA3, initialStringConfig, "a-h3-", puzzleNumber)
+    print("\n")
+
+    # A heuristic 4
+    print("Using A heuristic 4")
+    resultA4 = algorithms(puzzle, fuels, Ah4, "a")
+    createSolFile(resultA4, initialStringConfig, "a-h4-", puzzleNumber, fuels)
+    createSearchFile(resultA4, initialStringConfig, "a-h4-", puzzleNumber)
+    print("\n")
 
 
-# ----------------------------------------------------------------------------------------------------------------------------
-#puzzleList = readpuzzle("sample-input.txt")
-#for puzzleElem in puzzleList:
-    #solvePuzzle(puzzleElem["puzzle"], puzzleElem["fuel"], puzzleElem["stringOfPuzzle"], puzzleElem["puzzleNum"])
-    
+# ---------------------------------------------------------------------------------------------------------------------
+puzzleList = readpuzzle("sample-input.txt")
+for puzzleElem in puzzleList:
+    solvePuzzle(puzzleElem["puzzle"], puzzleElem["fuel"], puzzleElem["stringOfPuzzle"], puzzleElem["puzzleNum"])
 
-# ------------------------------------------For writing to excel sheet-------------------------------------------------------------------------
 
+# ------------------------------------------For writing to excel sheet-------------------------------------------------
 
 puzzle50RandomList = readpuzzle("50Puzzles.txt")
 
