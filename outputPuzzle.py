@@ -1,6 +1,7 @@
 from algorithms import *
 from inputPuzzle import *
 from heuristics import *
+import xlsxwriter
 
 
 def createSolFile(result, initialConfigString, algorithmType, puzzleNumber, fuelLevels):
@@ -119,17 +120,185 @@ def createSearchFile(result, initialConfigString, algorithmType, puzzleNumber):
 # ----------------------------------------------------------------------------------------------------------------------------
 
 
-def solvePuzzle(puzzle, fuels, initialStringConfig, puzzleNumber):  # main function; call algorithm function for all puzzles
-    print("Solving puzzle #" + str(puzzleNumber) + "\n")
+#def solvePuzzle(puzzle, fuels, initialStringConfig, puzzleNumber):  # main function; call algorithm function for all puzzles
+    #print("Solving puzzle #" + str(puzzleNumber) + "\n")
 
     # UCS
-    print("Using UCS")
-    resultUCS = algorithms(puzzle, fuels,uniformCostSearch , "ucs")
-    createSolFile(resultUCS, initialStringConfig, "ucs-", puzzleNumber, fuels)
-    print("\n")
+    #print("Using UCS")
+    #resultUCS = algorithms(puzzle, fuels,GBFSh4 , "ucs")
+    #createSolFile(resultUCS, initialStringConfig, "ucs-", puzzleNumber, fuels)
+    #print("\n")
 
 
 # ----------------------------------------------------------------------------------------------------------------------------
-puzzleList = readpuzzle("sample-input.txt")
-for puzzleElem in puzzleList:
-    solvePuzzle(puzzleElem["puzzle"], puzzleElem["fuel"], puzzleElem["stringOfPuzzle"], puzzleElem["puzzleNum"])
+#puzzleList = readpuzzle("sample-input.txt")
+#for puzzleElem in puzzleList:
+    #solvePuzzle(puzzleElem["puzzle"], puzzleElem["fuel"], puzzleElem["stringOfPuzzle"], puzzleElem["puzzleNum"])
+    
+
+# ------------------------------------------For writing to excel sheet-------------------------------------------------------------------------
+
+
+puzzle50RandomList = readpuzzle("50Puzzles.txt")
+
+workbook = xlsxwriter.Workbook("50PuzzlesOutput.xlsx")
+worksheet = workbook.add_worksheet()
+
+worksheet.write(0, 0, "Puzzle Number")
+worksheet.write(0, 1, "Algorithm")
+worksheet.write(0, 2, "Heuristic")
+worksheet.write(0, 3, "Length of the Solution")
+worksheet.write(0, 4, "Length of the Search Path")
+worksheet.write(0, 5, "Execution Time (in seconds)")
+
+def solvePuzzleInSpreadsheet(puzzle, fuelLevels, puzzleNumber, worksheet):
+
+    print("Solving puzzle #"+str(puzzleNumber)+"\n")
+
+    #UCS
+    worksheet.write(((puzzleNumber - 1) * 9)+1, 0, puzzleNumber)
+    worksheet.write(((puzzleNumber - 1) * 9)+1, 1, "UCS")
+    worksheet.write(((puzzleNumber - 1) * 9)+1, 2, "NA")
+    print("Using UCS")
+    resultUCS = algorithms(puzzle, fuelLevels, uniformCostSearch, "ucs")
+    if resultUCS["result"] == "goal_reached":
+        worksheet.write(((puzzleNumber - 1) * 9)+1, 3, len(resultUCS["state"]["solutionPath"]))
+    else:
+        worksheet.write(((puzzleNumber - 1) * 9)+1, 3, "No solution!")
+
+    worksheet.write(((puzzleNumber - 1) * 9)+1, 4, resultUCS["length_search_path"])
+    worksheet.write(((puzzleNumber - 1) * 9)+1, 5, float("{:.2f}".format(resultUCS["runtime"])))
+    print("\n")
+
+    #GBFS heuristic 1
+    worksheet.write(((puzzleNumber - 1) * 9)+2, 0, puzzleNumber)
+    worksheet.write(((puzzleNumber - 1) * 9)+2, 1, "GBFS")
+    worksheet.write(((puzzleNumber - 1) * 9)+2, 2, "h1")
+    print("Using GBFS heuristic 1")
+    resultGBFS1 = algorithms(puzzle, fuelLevels, GBFSh1, "GBFS")
+
+    if resultGBFS1["result"] == "goal_reached":
+        worksheet.write(((puzzleNumber - 1) * 9)+2, 3, len(resultGBFS1["state"]["solutionPath"]))
+    else:
+        worksheet.write(((puzzleNumber - 1) * 9)+2, 3, "No solution!")
+
+    worksheet.write(((puzzleNumber - 1) * 9)+2, 4, resultGBFS1["length_search_path"])
+    worksheet.write(((puzzleNumber - 1) * 9)+2, 5, float("{:.2f}".format(resultGBFS1["runtime"])))
+    print("\n")
+
+    #GBFS heuristic 2
+    worksheet.write(((puzzleNumber - 1) * 9)+3, 0, puzzleNumber)
+    worksheet.write(((puzzleNumber - 1) * 9)+3, 1, "GBFS")
+    worksheet.write(((puzzleNumber - 1) * 9)+3, 2, "h2")
+    print("Using GBFS heuristic 2")
+    resultGBFS2 = algorithms(puzzle, fuelLevels, GBFSh2, "GBFS")
+
+    if resultGBFS2["result"] == "goal_reached":
+        worksheet.write(((puzzleNumber - 1) * 9)+3, 3, len(resultGBFS2["state"]["solutionPath"]))
+    else:
+        worksheet.write(((puzzleNumber - 1) * 9)+3, 3, "No solution!")
+
+    worksheet.write(((puzzleNumber - 1) * 9)+3, 4, resultGBFS2["length_search_path"])
+    worksheet.write(((puzzleNumber - 1) * 9)+3, 5, float("{:.2f}".format(resultGBFS2["runtime"])))
+    print("\n")
+
+    #GBFS heuristic 3
+    worksheet.write(((puzzleNumber - 1) * 9)+4, 0, puzzleNumber)
+    worksheet.write(((puzzleNumber - 1) * 9)+4, 1, "GBFS")
+    worksheet.write(((puzzleNumber - 1) * 9)+4, 2, "h3")
+    print("Using GBFS heuristic 3")
+    resultGBFS3 = algorithms(puzzle, fuelLevels, GBFSh3, "gbfs")
+
+    if resultGBFS3["result"] == "goal_reached":
+        worksheet.write(((puzzleNumber - 1) * 9)+4, 3, len(resultGBFS3["state"]["solutionPath"]))
+    else:
+        worksheet.write(((puzzleNumber - 1) * 9)+4, 3, "No solution!")
+
+    worksheet.write(((puzzleNumber - 1) * 9)+4, 4, resultGBFS3["length_search_path"])
+    worksheet.write(((puzzleNumber - 1) * 9)+4, 5, float("{:.2f}".format(resultGBFS3["runtime"])))
+    print("\n")
+
+    #GBFS heuristic 4
+    worksheet.write(((puzzleNumber - 1) * 9)+5, 0, puzzleNumber)
+    worksheet.write(((puzzleNumber - 1) * 9)+5, 1, "GBFS")
+    worksheet.write(((puzzleNumber - 1) * 9)+5, 2, "h4")
+    print("Using GBFS heuristic 4")
+    resultGBFS4 = algorithms(puzzle, fuelLevels, GBFSh4, "gbfs")
+
+    if resultGBFS4["result"] == "goal_reached":
+        worksheet.write(((puzzleNumber - 1) * 9)+5, 3, len(resultGBFS4["state"]["solutionPath"]))
+    else:
+        worksheet.write(((puzzleNumber - 1) * 9)+5, 3, "No solution!")
+
+    worksheet.write(((puzzleNumber - 1) * 9)+5, 4, resultGBFS4["length_search_path"])
+    worksheet.write(((puzzleNumber - 1) * 9)+5, 5, float("{:.2f}".format(resultGBFS4["runtime"])))
+    print("\n")
+
+    #A heuristic 1
+    worksheet.write(((puzzleNumber - 1) * 9)+6, 0, puzzleNumber)
+    worksheet.write(((puzzleNumber - 1) * 9)+6, 1, "A/A*")
+    worksheet.write(((puzzleNumber - 1) * 9)+6, 2, "h1")
+    print("Using A heuristic 1")
+    resultA1 = algorithms(puzzle, fuelLevels, Ah1, "a")
+
+    if resultA1["result"] == "goal_reached":
+        worksheet.write(((puzzleNumber - 1) * 9)+6, 3, len(resultA1["state"]["solutionPath"]))
+    else:
+        worksheet.write(((puzzleNumber - 1) * 9)+6, 3, "No solution!")
+
+    worksheet.write(((puzzleNumber - 1) * 9)+6, 4, resultA1["length_search_path"])
+    worksheet.write(((puzzleNumber - 1) * 9)+6, 5, float("{:.2f}".format(resultA1["runtime"])))
+    print("\n")
+
+    #A heuristic 2
+    worksheet.write(((puzzleNumber - 1) * 9)+7, 0, puzzleNumber)
+    worksheet.write(((puzzleNumber - 1) * 9)+7, 1, "A/A*")
+    worksheet.write(((puzzleNumber - 1) * 9)+7, 2, "h2")
+    print("Using A heuristic 2")
+    resultA2 = algorithms(puzzle, fuelLevels, Ah2, "a")
+
+    if resultA2["result"] == "goal_reached":
+        worksheet.write(((puzzleNumber - 1) * 9)+7, 3, len(resultA2["state"]["solutionPath"]))
+    else:
+        worksheet.write(((puzzleNumber - 1) * 9)+7, 3, "No solution!")
+
+    worksheet.write(((puzzleNumber - 1) * 9)+7, 4, resultA2["length_search_path"])
+    worksheet.write(((puzzleNumber - 1) * 9)+7, 5, float("{:.2f}".format(resultA2["runtime"])))
+    print("\n")
+
+    #A heuristic 3
+    worksheet.write(((puzzleNumber - 1) * 9)+8, 0, puzzleNumber)
+    worksheet.write(((puzzleNumber - 1) * 9)+8, 1, "A/A*")
+    worksheet.write(((puzzleNumber - 1) * 9)+8, 2, "h3")
+    print("Using A heuristic 3")
+    resultA3 = algorithms(puzzle, fuelLevels, Ah3, "a")
+
+    if resultA3["result"] == "goal_reached":
+        worksheet.write(((puzzleNumber - 1) * 9)+8, 3, len(resultA3["state"]["solutionPath"]))
+    else:
+        worksheet.write(((puzzleNumber - 1) * 9)+8, 3, "No solution!")
+
+    worksheet.write(((puzzleNumber - 1) * 9)+8, 4, resultA3["length_search_path"])
+    worksheet.write(((puzzleNumber - 1) * 9)+8, 5, float("{:.2f}".format(resultA3["runtime"])))
+    print("\n")
+
+    #A heuristic 4
+    worksheet.write(((puzzleNumber - 1) * 9)+9, 0, puzzleNumber)
+    worksheet.write(((puzzleNumber - 1) * 9)+9, 1, "A/A*")
+    worksheet.write(((puzzleNumber - 1) * 9)+9, 2, "h4")
+    print("Using A heuristic 4")
+    resultA4 = algorithms(puzzle, fuelLevels, Ah4, "a")
+
+    if resultA4["result"] == "goal_reached":
+        worksheet.write(((puzzleNumber - 1) * 9)+9, 3, len(resultA4["state"]["solutionPath"]))
+    else:
+        worksheet.write(((puzzleNumber - 1) * 9)+9, 3, "No solution!")
+
+    worksheet.write(((puzzleNumber - 1) * 9)+9, 4, resultA4["length_search_path"])
+    worksheet.write(((puzzleNumber - 1) * 9)+9, 5, float("{:.2f}".format(resultA4["runtime"])))
+    print("\n")
+
+for puzzleElem in puzzle50RandomList:
+    solvePuzzleInSpreadsheet(puzzleElem["puzzle"], puzzleElem["fuel"], puzzleElem["puzzleNum"], worksheet)
+
+workbook.close()
