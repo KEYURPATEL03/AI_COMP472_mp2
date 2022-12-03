@@ -1,0 +1,200 @@
+#
+# 50 puzzles
+#
+
+#***********************************
+#      4 Cars for the Puzzle
+#***********************************
+
+# Puzzle #1
+..........DBAA..DB......CC..........
+
+# Puzzle #2
+..O.....O.M.AAO.M.............PPP... O7 P3
+
+# Puzzle #3
+..OOO.....M.AA..M..........PPP...... 
+
+# Puzzle #4
+.........OOOAA...M.....M....BB...... O10 M4 B9
+
+# Puzzle #5
+...O.....O..AA.O...M.....M......BB.. O5 M2 B0
+
+#***********************************
+#      5 Cars for the Puzzle
+#***********************************
+
+# Puzzle #6
+MM...O....BO.AA.BO..........CC...... M1 O3 C5
+
+# Puzzle #7
+.....O...MMOAA..BO....B.....CC...... O8 B2 C7
+
+# Puzzle #8
+.....O..PPPO..AA.O...M.....MBB...... O2 M4
+
+# Puzzle #9
+....MM..B...AAB.C.....C.....DD......
+
+# Puzzle #10
+.....OPPP..OAA.M.O...M.....QQQ...... M2 Q6
+
+#***********************************
+#      6 Cars for the Puzzle
+#***********************************
+
+# Puzzle #11
+OOOM.B...M.BAAC.....C.....D.....D... O4 C7 D5
+
+# Puzzle #12
+MMOOO....B..AACB....C.....D.....D...
+
+# Puzzle #13
+....MM..O..BAAO..B..O..C.....C.DD... M9 C3 D3
+
+# Puzzle #14
+..MM.......BAA.CDB...CD....E.....E.. C2 E4
+
+# Puzzle #15
+...MM.....B.AA.CB.OOOC.....D.....D.. M3 B2 C3 O4 D1
+
+
+#***********************************
+#      7 Cars for the Puzzle
+#***********************************
+
+# Puzzle #16
+...OOO....P...AAP.....P.MBBCDDM..C.. O3 P4 M2
+
+# Puzzle #17
+....OP....OP..AAOP......MBBCDDM..C.. O4 M5
+
+# Puzzle #18
+M...O.MPPPO.AA..O........BBCDD...C.. C3
+
+# Puzzle #19
+....O.....O.AA..O....PPPMBBCDDM..C.. D2 M5
+
+# Puzzle #20
+....O.MM..O..BAAO..B.....CCDEE...D.. O2 B5 D3
+
+
+#***********************************
+#      8 Cars for the Puzzle
+#***********************************
+
+# Puzzle #21
+.OOOMM.PPPBBAA...C.....CQQQRRR...... O1 M5 C3 R7
+
+# Puzzle #22
+.OMMBB.O...C.OAA.C.D...P.D...PEE...P O4 C2 D3 P5
+
+# Puzzle #23
+MMBB.O.C...O.CAA.O.P.....P.....PDDEE M3 O5 P2
+
+# Puzzle #24
+OOO..M.....M.BAA.C.B...C.DEEFF.D.... O2 M5 B7 C3 D4 E3 F4
+
+# Puzzle #25
+.OMMBB.O...C.OAA.CPPP....D...E.D...E O4 M3 P5 D2
+
+
+#***********************************
+#      9 Cars for the Puzzle
+#***********************************
+
+# Puzzle #26
+O..PPPO..MBBOAAMCD.E..CD.EQQQ....... O3 P4 M8 Q5
+
+# Puzzle #27
+O.MPPPO.MBC.OAABCD.....D...E.F...E.F M5 C3 F5
+
+# Puzzle #28
+OOOMM...BBC.AAP.C...P.....PDDEQQQ..E P4 Q5
+
+# Puzzle #29
+..OMM...OB..AAOB.C..PPPCDDEE...FF... E3
+
+# Puzzle #30
+OOO.MM....PB..AAPBC..QP.C..QDD...QEE
+
+
+#***********************************
+#      10 Cars for the Puzzle
+#***********************************
+
+# Puzzle #31
+M...BOM...BOCAA.DOC..PD...EPFF..EPGG M4 B5 D6 P3
+
+# Puzzle #32
+O..MMPO.QQQPOAABCPDD.BC....E.....EFF O5 M5 D5 E4
+
+# Puzzle #33
+OOOMMB....CB..AAC....PDD...PEEFF.PGG O4 M7 B3 C4 P6 D4 F8 E5 G3
+
+# Puzzle #34
+.MMOBB...OCPDAAOCPD.EFFP..E....QQQ..
+
+# Puzzle #35
+OOO.MMBPPPQCB.AAQC...RQ....RDD...REE M5 Q4
+
+
+#***********************************
+#      11 Cars for the Puzzle
+#***********************************
+
+# Puzzle #36
+MOB.CCMOB....OAADE....DE..FPPPGGFHH. M7 O7 P4
+
+# Puzzle #37
+.MBOOOPMB.CDPQAACDPQ..E..Q.FE.GG.F.. M1 C3 E2
+
+# Puzzle #38
+O..PPPO..Q..OAAQ..MM.QBC.DEEBC.DFFGG O4 Q8
+
+# Puzzle #39
+MMBCDD..BCE...AAEF.OOOGF..HHGI.....I E9 G5
+
+# Puzzle #40
+O.MBCCO.MBDPO.AADPEE..QPFF..Q.RRR.Q. O3 M5 P4 R2
+
+
+#***********************************
+#      12 Cars for the Puzzle
+#***********************************
+
+# Puzzle #41
+MOOOP.MQQQPBAA.CPBDD.CEE...FGG...FHH M4 Q5 E8 G3
+
+# Puzzle #42
+..M.BB.CMOOO.CAADP.EEFDP.GGFHP..IIH. M7 O4 P5 H7
+
+# Puzzle #43
+O.MBCCO.MBDDOAAEF..PGEF..PGHHI.P...I
+
+# Puzzle #44
+MOB.CCMOB....OAADEPPP.DE..FQQQGGFHH. M4 O5 B6 C3 D7 E3 P2 F5 Q9 G8 H4
+
+# Puzzle #45
+.M..BBOMCCDEOAAFDEO.PF.GH.PIIGH.P...
+
+#***********************************
+#      13 Cars for the Puzzle
+#***********************************
+
+# Puzzle #46
+MBBC..M.OC.DAAO..DEEO.F.GHIIF.GHJJKK B4 E5 H2
+
+# Puzzle #47
+MMBBOCDEE.OCD.AAOF...GGF..HIJJ..HIKK M7 O3 G8 J4
+
+# Puzzle #48
+MBB.C.M.DOC.AADO...EFOGG.EFHHIJJKK.I M5 B7 C8 D3 O4 E5 F5 G7 H6 I5 J4 K3
+
+# Puzzle #49
+MOBBC.MOD.CPQODAAPQ.REEPQ.RFGG..RFHH
+
+# Puzzle #50
+OPMMB.OPC.BQOPCAAQD.REEQD.RFGG..RFHH O7 Q3 D4 G8
+
