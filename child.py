@@ -159,9 +159,9 @@ def childNodes(state, heuristic):
             if (puzzle[row][column] not in cars_moved) and (puzzle[row][column] != "."):
                 cars_moved.append(puzzle[row][column])
 
-                if (column +1 != 6) and (puzzle[row][column] == puzzle[row][column + 1]):  # horizontal car *
+                if (column <= 4) and (puzzle[row][column] == puzzle[row][column + 1]):  # horizontal car *
                     finishing_index_horizontal = column  # this will be used to find length of the car
-                    for i in range(column, 6):  # The loop will go till index 5 because there are total 6 elements in a row. *
+                    for i in range(column , 6):  # The loop will go till index 5 because there are total 6 elements in a row. *
                         if puzzle[row][i] != puzzle[row][column]:  # if simultaneous horizontal elements are not equal then, it is not a car and break.
                             break
                         else:
@@ -171,9 +171,9 @@ def childNodes(state, heuristic):
                     horizontal_children = moves(sol_path, puzzle, row, column, finishing_index_horizontal, fuels, heuristic, align)
                     children += horizontal_children
 
-                elif (row +1 != 6) and (puzzle[row][column] == puzzle[row + 1][column]):  # vertical car *
+                elif (row <= 4) and (puzzle[row][column] == puzzle[row + 1][column]):  # vertical car *
                     finishing_index_vertical = row  # the starting index of the horizontal car
-                    for j in range(row, 6):  # The loop will go till index 5 because there are total 6 rows. *
+                    for j in range(row , 6):  # The loop will go till index 5 because there are total 6 rows. *
                         if puzzle[j][column] != puzzle[row][column]:  # if simultaneous horizontal elements are not equal then, it is not a car and break.
                             break
                         else:
