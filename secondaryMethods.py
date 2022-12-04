@@ -44,10 +44,3 @@ def stringConfigPuzzle(puzzle):  # This will convert 6*6 matrix to string config
 
     return string_config
 
-
-def printMatrixPuzzle(puzzle):  #This will print the puzzle in matrix format for solution and search files
-    for i in puzzle:
-        temp = ""
-        for j in i:
-            temp += j + " "
-        print(temp)

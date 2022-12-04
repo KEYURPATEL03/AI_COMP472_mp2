@@ -1,3 +1,8 @@
+""""
+This file contains method that will read and parse the input file.
+"""
+
+
 def readpuzzle(file):
     list_of_puzzle = []  # an array to store the list of puzzle
     file_input = open(file, 'r')

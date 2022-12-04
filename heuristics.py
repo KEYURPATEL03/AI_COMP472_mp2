@@ -5,10 +5,10 @@ for GBFS f(n) = h(n) and, for A/A* f(n) = g(n) + h(n).
 
 
 def uniformCostSearch(state):
-    return len(state["solutionPath"])
+    return len(state["sol_path"])
 
 
-def GBFSh1(state):
+def GBFSh1(state):          #The number of blocking vechicles
     puzzle = state["puzzle"]
     row_with_ambulance = puzzle[2]
     unique_cars = []
@@ -27,7 +27,7 @@ def GBFSh1(state):
     return len(unique_cars)
 
 
-def GBFSh2(state):
+def GBFSh2(state):          #The number of blocked positions
     puzzle = state["puzzle"]
     row_with_ambulance = puzzle[2]
     blocked_positions = 0
@@ -45,11 +45,11 @@ def GBFSh2(state):
     return blocked_positions
 
 
-def GBFSh3(state):
+def GBFSh3(state):     #constant = 20
     return 20 * GBFSh1(state)  #noticed that increasing constant value up to certain limit was decreasing solution time
 
 
-def GBFSh4(state):
+def GBFSh4(state):   #Total length of all the cars in puzzle excluding length of the ambulance
     puzzle = state["puzzle"]
     total_cars_length = 0
     for row in range(0, 6):
